@@ -69,7 +69,6 @@ console.log(paul.project);
 console.log(paul);
 
 
-
 // TODO: create class User and method sort for all of his fields
 class User {
     constructor(name, surname, age, experience) {
@@ -117,3 +116,55 @@ function sort(users = [], field, way) {
 
 let sorted = sort(users, 'name', "desc");
 console.log(sorted);
+
+
+/* ------ PROTOTYPE ------ */
+
+function Hamster(name) {
+    this.name = name;
+    // unique stomach for each exemplar
+    this.stomach = [];
+}
+
+Hamster.prototype.findFood = function (food) {
+    this.stomach.push(food);
+}
+
+/* if we make stomach like prototype it will be common for all of exemplars (one stomach for all),
+so that we get the same arrays of food in each exemplar
+* if we want to get the unique stomach we need to create it in an constructor (function Hamster) */
+
+//Hamster.prototype.stomach = [];
+
+let boby = new Hamster("Boby");
+let buddy = new Hamster("Buddy");
+
+boby.findFood("apple");
+boby.findFood("peach");
+buddy.findFood("grapes");
+
+console.log(boby.stomach);
+console.log(buddy.stomach);
+
+
+/* ----- CALL, APPLY ----- */
+
+function sayHello() {
+    console.log(`Hello, my name is ${this.name}, I'm ${this.age}`);
+    console.log(this);
+}
+
+let user1 = {
+    name: 'Pedro',
+    age: 30
+};
+
+let user2 = {
+    name: 'Anna'
+};
+
+sayHello.call(user1);
+sayHello.call(user2);
+
+// get an array as a parameter
+sayHello.apply(user1);
