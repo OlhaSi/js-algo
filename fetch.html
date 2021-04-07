@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch</title>
+</head>
+<body>
+
+<script>
+
+    /* ----- FETCH ----- */
+
+    // send a request to the endpoint
+    fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+        // return promise
+        .then(value => value.json()
+            .then((jsonedValue) => {
+                // print values on page
+                jsonedValue.forEach(kurs => {
+                    document.write(`<p> ${kurs.ccy} to ${kurs.base_ccy} is BUY: ${kurs.buy} SALE: ${kurs.sale} </p>`)
+                })
+            })
+        );
+
+
+    /* ----- MAPS ----- */
+
+    // get my current location
+    navigator.geolocation.getCurrentPosition(success);
+
+    function success(position) {
+        let coords = position.coords;
+
+        console.log(`Your current position is: `);
+        console.log(`Latitude: ${coords.latitude}`);
+        console.log(`Longitude: ${coords.longitude}`);
+        console.log(`More or less ${coords.accuracy} meters`);
+    }
+
+</script>
+
+</body>
+</html>
