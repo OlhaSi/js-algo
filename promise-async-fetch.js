@@ -1,6 +1,6 @@
 /* ----- PROMISE ----- */
 
-// setTimeout without promise
+// TODO: setTimeout without promise
 function f(a, b, cb) {
     let res = a + b;
     setTimeout(() => {
@@ -12,7 +12,7 @@ f(10, 20, (res) => {
     console.log(res)
 });
 
-// using promise
+// TODO: setTimeout using promise
 function fPromise(a, b) {
     let res = a + b;
     return new Promise((resolve, reject) => {
@@ -74,6 +74,33 @@ getSum(10, 50)
     .catch(reason => {
         console.error(reason);
     });
+
+// TODO: make a printer function
+let mySuperWord = 'I like JS';
+
+function printer(stringToPrint, i) {
+    let randomTime = Math.floor(Math.random() * 1000);
+
+    setTimeout(() => {
+
+        let sliced = stringToPrint.slice(0, i);
+
+        console.clear();
+        console.log(sliced);
+
+        if (i <= stringToPrint.length) {
+            printer(stringToPrint, ++i);
+        }
+    }, randomTime);
+
+    // for (let i = 1; i <= stringToPrint.length; i++) {
+    //     //console.log(stringToPrint[i]);
+    //     let sliced = stringToPrint.slice(0, i);
+    //     console.log(sliced);
+    // }
+}
+
+printer(mySuperWord, 2);
 
 
 /* ----- ASYNC AWAIT ----- */
