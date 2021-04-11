@@ -147,6 +147,77 @@ console.log(boby.stomach);
 console.log(buddy.stomach);
 
 
+// TODO: add new methods to Array using prototype
+let arrOfNumbers = [3, 5, 63, 2, 662, 26, 8, 9, 54];
+
+// TODO: get min number in array using Math + destructuring
+Array.prototype.getMinInArray = function () {
+    console.log(this);
+    // destructuring ...this
+    console.log(Math.min(...this));
+}
+
+/*// this  do not work, because arrow function don't have <this>
+Array.prototype.getMinInArray = () => {
+    console.log(this);
+}*/
+
+// TODO: get min numbers in array using loop
+Array.prototype.getMinInArrayLoop = function () {
+    let min = this[0];
+
+    for (let i = 0; i < this.length; i++) {
+        if (this[i] < min) {
+            min = this[i];
+        }
+    }
+    return min;
+}
+console.log(arrOfNumbers.getMinInArrayLoop());
+console.log('------------------');
+arrOfNumbers.getMinInArray();
+console.log('------------------');
+
+// TODO: get string with min length from array
+let stringArray = ['apple', 'car', 'spring', 'me'];
+
+Array.prototype.getMinString = function () {
+    let minLengthWord = this[0];
+
+    for (let el of this) {
+        if (el.length < minLengthWord.length) {
+            minLengthWord = el;
+        }
+    }
+    return minLengthWord;
+}
+console.log(stringArray.getMinString());
+
+// destructuring examples
+let [first, second, third, ...another] = arrOfNumbers;
+console.log(first);
+console.log(another);
+
+// get a copy of the array
+let [...copy] = arrOfNumbers;
+console.log(copy);
+
+// TODO: find objects with id in array of objects
+let arrayObj = [
+    {name: 'Anna', id: 1},
+    {name: 'Kate'},
+    {name: 'Dan', id: 2},
+    {name: 'Jon', id: 3},
+    {name: 'Harvy'}
+];
+
+Array.prototype.findObjWithId = function () {
+    // return this.filter(value => value.hasOwnProperty('id'));
+    return this.filter(value => value.id);
+}
+console.log(arrayObj.findObjWithId());
+
+
 /* ----- CALL, APPLY ----- */
 
 function sayHello() {
