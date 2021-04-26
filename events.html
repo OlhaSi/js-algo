@@ -1,0 +1,97 @@
+<div id="black">
+    <div id="green">
+        <div id="blue">
+
+        </div>
+    </div>
+</div>
+
+<div>
+
+</div>
+<form id="form" name="formName">
+    <input type="text" name="email" value="email@gmail.com">
+    <input type="text" name="password" value="1234">
+    <button id="ok">OK</button>
+
+</form>
+
+<style>
+    #black {
+        width: 400px;
+        height: 400px;
+        background-color: black;
+    }
+
+    #green {
+        width: 200px;
+        height: 200px;
+        background-color: green;
+    }
+
+    #blue {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+</style>
+
+<script>
+
+    /* ----- STOP PROPAGATION ----- */
+    let blackDiv = document.getElementById('black');
+    let greenDiv = document.getElementById('green');
+    let blueDiv = document.getElementById('blue');
+
+    blackDiv.onclick = () => {
+        console.log('black');
+    }
+
+    greenDiv.onclick = () => {
+        console.log('green');
+    }
+
+    /*blueDiv.onclick = (e) => {
+        console.log('blue');
+        e.stopPropagation();
+    }*/
+
+    /* ---- Event listener ---- */
+    // another option
+    blueDiv.addEventListener('click', (e) => {
+        console.log('blue');
+        e.stopPropagation();
+    });
+
+
+    /* ----- FORMS API ----- */
+    let form = document.forms.formName;
+    console.log(form);
+
+    let email = formName.email;
+    let password = formName.password;
+    //let ok = formName.ok;
+
+    let ok = document.getElementById('ok');
+
+    /* ---- Prevent default ---- */
+    ok.onclick = (ev) => {
+        ev.preventDefault();
+        console.log(email.value);
+        console.log(password.value);
+    }
+
+
+    /* ----- LOCAL STORAGE ----- */
+
+    localStorage.setItem('hi', JSON.stringify({name: 'localstorage'}));
+    localStorage.setItem('hello', JSON.stringify(['Olha', 'Andy', 'Dan']));
+
+    let item = localStorage.getItem('hello');
+    console.log(JSON.parse(item));
+    //console.log(JSON.parse(item)[0]);
+
+    localStorage.removeItem('hi');
+    // localStorage.clear();
+
+</script>
