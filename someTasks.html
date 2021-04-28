@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="divToChange">
+
+</div>
+
+<input type="range" id="range" value="200" min="100" max="400">
+
+<script>
+    let divToChange = document.getElementById('divToChange');
+    let range = document.getElementById('range');
+
+    range.oninput = () => {
+        console.log(range.value);
+
+        const value = range.value;
+
+        divToChange.style.width = value + 'px';
+        divToChange.style.height = value + 'px';
+
+    }
+
+</script>
+
+<style>
+
+    #divToChange {
+        width: 400px;
+        height: 400px;
+        background-color: lightblue;
+    }
+
+</style>
+
+</body>
+</html>

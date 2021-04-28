@@ -1,7 +1,7 @@
 
 /* DESTRUCTURING */
 
-// TODO: get object keys
+/*// TODO: get object keys
 let user = {
     name: "Dan",
     age: 25,
@@ -18,7 +18,32 @@ let name = "Kate";
 let {name: userName, age, company} = user;
 console.log(name);
 console.log(userName);
+console.log(age);*/
+
+// destructuring with an object
+let dana = {
+    name: 'Dana',
+    age: 23,
+    car: false,
+    skills: ['c', 'js', 'react']
+};
+
+const {name, age, ...other} = dana;
+console.log(name);
 console.log(age);
+console.log(other);
+
+// destructuring with an array
+let names = ['Roman', 'Kate', 'Dana', 'Sandra'];
+
+let [n1, n2, ...otherNames] = names;
+console.log(n1);
+console.log(otherNames);
+
+// structuring -- open an obj an and the new property
+let someObj = {...dana, pet: 'dog'};
+console.log(someObj);
+console.log('____________________________');
 
 // TODO: get array elements
 
