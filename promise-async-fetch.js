@@ -75,7 +75,7 @@ getSum(10, 50)
         console.error(reason);
     });
 
-// TODO: make a printer function
+/*// TODO: make a printer function
 let mySuperWord = 'I like JS';
 
 function printer(stringToPrint, i) {
@@ -100,7 +100,7 @@ function printer(stringToPrint, i) {
     // }
 }
 
-printer(mySuperWord, 2);
+printer(mySuperWord, 2);*/
 
 
 /* ----- ASYNC AWAIT ----- */
@@ -113,7 +113,21 @@ function asynchronus() {
     });
 }
 
-async function asaw() {
+// if we don't use <await> we NEED to use .then to get the result of the resolve of Promise object,
+// but in that case we well get the result 1 3 immediately and result 2 in the two seconds
+async function asawPromise() {
+    console.log(1);
+
+    let a = asynchronus();
+    a.then(value => console.log(value));
+
+    console.log(3);
+}
+
+// if we use <await> we don't need to use .then to get the result of the resolve,
+// in that case we well get the result 1 immediately, the result 2 in the two seconds and than 3 immediately,
+// so that <await> is actually waiting for the result!!! and then returning it.
+async function asawAwait() {
     console.log(1);
 
     let a = await asynchronus();
@@ -122,4 +136,105 @@ async function asaw() {
     console.log(3);
 }
 
-asaw();
+asawPromise();
+asawAwait();
+
+
+
+// TODO: print some text in the callback, promise, async await
+// callback
+function printText(text, cb) {
+    console.log(text);
+    if (cb) {
+        cb();
+    }
+}
+
+const printAll = () => {
+    printText('Hello', () =>
+        printText('world', () =>
+            printText('!'))
+    )
+};
+
+//printAll();
+
+// promise
+const printTextP = (text) => {
+    return new Promise((resolve, reject) => {
+            console.log(text);
+            resolve(text);
+        }
+    );
+}
+
+const printAllP = () => {
+    printTextP('Hello')
+        .then((t) => `${t} world`)
+        .then((t) => `${t}!`)
+        .then(t => console.log(t))
+}
+
+// printAllP();
+
+// async await
+const printAllAsyncAwait = async () => {
+    await printTextP('1Hello');
+    await printTextP('2world');
+    await printTextP('3!');
+}
+
+printAllAsyncAwait()
+
+
+// TODO: make a function to schedule a meeting
+const hasMeeting = false;
+
+const meetingDetails = {
+    name: 'Marketing Meeting',
+    time: 'at 1 PM',
+    location: 'Zoom'
+}
+
+const meeting = () => {
+    return new Promise((resolve, reject) => {
+        if (!hasMeeting) {
+            resolve(meetingDetails);
+        } else {
+            reject(new Error('Meeting already scheduled'));
+        }
+    });
+}
+
+const addToCalendar = (meetingDetails) => {
+
+    return new Promise((resolve, reject) => {
+        const calendar = `${meetingDetails.name} is scheduled on ${meetingDetails.time} on ${meetingDetails.location}`;
+        resolve(calendar);
+    })
+}
+
+// using .then
+/*meeting()
+    .then(addToCalendar)
+    .then(value => {
+        console.log(value);
+    })
+
+    .catch(reason => {
+        console.error(reason);
+    })*/
+
+// using async await
+async function myMeeting() {
+    try {
+        const meetingDetails = await meeting();
+        const message = await addToCalendar(meetingDetails);
+        console.log(message);
+        return message;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+myMeeting();
